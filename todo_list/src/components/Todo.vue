@@ -16,8 +16,20 @@ defineProps({
     manager: String
 })
 
-// export default {
-//     name: 'TodoList',
-//     props: props
-// }
 </script>
+
+<style>
+.todo {
+    border: 1px solid #d7d7d7;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+}
+
+.todo:hover {
+    box-shadow: 0 0 10px 0 #d7d7d7;
+    cursor: pointer;
+    transform: translate(0, -5px) scale(1.05);
+    transition: all 0.3s;
+}
+</style>
