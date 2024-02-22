@@ -1,11 +1,9 @@
 <script setup lang="ts">
-// import QuizQuestion from './components/Quiz/QuizQuestion.vue';
-
+import QuizFull from './components/Quiz/QuizFull.vue';
 </script>
 
 <template>
-  <!-- <QuizQuestion/> -->
-
+  <QuizFull />
 </template>
 
 <style scoped>
@@ -15,9 +13,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
