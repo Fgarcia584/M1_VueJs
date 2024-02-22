@@ -7,7 +7,6 @@ const questionsStore = useQuestionsStore();
 const currentQuestion = ref(0);
 const score = ref(0);
 const submitAnswer = (answer: boolean) => {
-    console.log( "QuizFull :",  answer);
     if (answer) {
         score.value += 1;
     }
@@ -23,16 +22,15 @@ const submitAnswer = (answer: boolean) => {
                 <div class="question" v-for="question in questionsStore.quizz.questions" :key="question.id"
                     :id="question.id as unknown as string">
                     <div v-if="question.id === currentQuestion">
-                        <QuizQuestion v-bind="question" @submitAnswer="answer => submitAnswer(answer)"/>
+                        <QuizQuestion v-bind="question" @submitAnswer="answer => submitAnswer(answer)" />
                     </div>
                 </div>
             </div>
             <div v-if="currentQuestion >= questionsStore.quizz.questions.length">
-                <h1>Score: {{ score }} / {{questionsStore.quizz.questions.length}}</h1>
+                <h1>Score: {{ score }} / {{ questionsStore.quizz.questions.length }}</h1>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
