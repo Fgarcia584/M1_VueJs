@@ -2,12 +2,17 @@
 import { answer } from '../../types';
 
 const props = defineProps<answer>();
+const emit = defineEmits(['submitAnswer']);
+
+const SubmitAnswer = () => {
+  emit('submitAnswer', props.correct);
+};
 
 </script>
 
 <template>
   <div>
-    <div class="answer" :id="props.id as unknown as string">
+    <div class="answer" :id="props.id as unknown as string" @click="SubmitAnswer">
       <div>{{ props.text }}</div>
     </div>
   </div>

@@ -3,6 +3,8 @@ import { ref } from "vue"
 
 export const useQuestionsStore = defineStore('questions', () => {
     const quizz = ref({
+        id: 0,
+        title: "Europe Capitals",
         questions: [
             {
                 id: 0,

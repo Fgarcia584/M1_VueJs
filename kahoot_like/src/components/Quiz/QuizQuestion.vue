@@ -3,18 +3,22 @@ import { question } from '../../types';
 import QuizCard from './QuizCard.vue';
 
 const props = defineProps<question>();
+const emit = defineEmits(['submitAnswer']);
+
+const submitAnswer = (answer: boolean) => {
+    emit('submitAnswer', answer);
+};
 
 </script>
 
 <template>
     <div>
-        <h1>QuizQuestion</h1>
         <div class="question-title">{{ props.title }}</div>
 
         <div class="answers-container">
             <div class="question-answers">
                 <div class="answer" v-for="answer in props.answers" :key="answer.id">
-                    <QuizCard v-bind="answer"/>
+                    <QuizCard v-bind="answer" @submitAnswer="answer => submitAnswer(answer)"/>
                 </div>
             </div>
         </div>
