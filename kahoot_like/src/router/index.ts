@@ -7,7 +7,8 @@ const router = createRouter({
         { path: "/test", component: () => import("../views/Test.vue") },
         { path: "/register", component: () => import("../views/Register/index.vue") },
         { path: "/login", component: () => import("../views/Login/index.vue") },
-        // { path: "/quizz/:id", component: () => import("../views/Quizz.vue") },
+        { path: "/quiz/add", component: () => import("../views/Quiz/Add/index.vue") },
+        // { path: "/quiz/:id", component: () => import("../views/Quiz.vue") },
     ],
 });
 

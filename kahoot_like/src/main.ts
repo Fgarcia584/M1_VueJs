@@ -4,6 +4,8 @@ import './style.css'
 import App from './App.vue'
 import router from './router' // Import the router module
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from 'firebase/firestore'
 
 
 const firebaseConfig = {
@@ -21,7 +23,13 @@ const firebaseConfig = {
   appId: "1:101671170513:web:90fd177f7bcc13197e30f0"
 
 };
-initializeApp(firebaseConfig)
+
+
+const firebase = initializeApp(firebaseConfig);
+const auth = getAuth(firebase)
+const db = getFirestore(firebase)
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -30,4 +38,4 @@ app.use(pinia)
 app.use(router)
 app.mount('#app')
 
-
+export { auth, db, googleProvider }

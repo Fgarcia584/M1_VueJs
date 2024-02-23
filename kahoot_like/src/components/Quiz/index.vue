@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useQuestionsStore } from '../../store'
 import QuizQuestion from './QuizQuestion.vue';
 
@@ -12,6 +12,12 @@ const submitAnswer = (answer: boolean) => {
     }
     currentQuestion.value += 1;
 };
+
+
+onMounted(() => {
+    questionsStore.populate();
+});
+
 </script>
 
 <template>

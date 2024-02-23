@@ -17,7 +17,7 @@ const submitAnswer = (answer: boolean) => {
 
         <div class="answers-container">
             <div class="question-answers">
-                <div class="answer" v-for="answer in props.answers" :key="answer.id">
+                <div v-for="answer in props.answers" :key="answer.id">
                     <QuizCard v-bind="answer" @submitAnswer="answer => submitAnswer(answer)"/>
                 </div>
             </div>

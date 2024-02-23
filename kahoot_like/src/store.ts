@@ -1,5 +1,7 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
+import { collection, getDocs } from "firebase/firestore"
+import { db } from "./main"
 
 export const useQuestionsStore = defineStore('questions', () => {
     const quizz = ref({
@@ -106,9 +108,18 @@ export const useQuestionsStore = defineStore('questions', () => {
                     { id: 3, text: "Madrid", correct: false }
                 ]
             }
-            
+
         ]
     })
 
-    return { quizz }
+    const populate = async () => {
+        const quizzesCollection = collection(db, "quizs");
+        const datas = await getDocs(quizzesCollection)
+        datas.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+        });
+        
+    }
+
+    return { quizz, populate }
 })

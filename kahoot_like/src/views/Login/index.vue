@@ -2,20 +2,21 @@
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '../../stores/user.ts';
 
 const Email = ref('');
 const Password = ref('');
 
 const router = useRouter();
 const ErrorMsg = ref('');
+const userStore = useUserStore();
 
 const SubmitLogin = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, Email.value, Password.value)
         .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-            router.push('/home');
+            userStore.setUser(userCredential.user);
+            router.push('/');
         })
         .catch((error) => {
             switch (error.code) {
@@ -29,6 +30,7 @@ const SubmitLogin = () => {
                     ErrorMsg.value = 'Invalid email';
                     break;
                 default:
+                    console.log(error);
                     ErrorMsg.value = 'An error occurred';
                     break;
             }
@@ -54,4 +56,65 @@ const SubmitLogin = () => {
 </template>
 
 <style scoped>
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    background-color: rgb(61, 61, 61);
+    border: 1px solid #ccc;
+}
+
+.login-title {
+    font-size: 2rem;
+    margin: 1rem;
+}
+
+.login-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-input {
+    width: 20vw;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-button {
+    width: 20vw;
+    padding: 1rem;
+    margin: 1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.error-container {
+    border: 1px solid red;
+    border-radius: 5px;
+    background-color: red;
+    width: 20vw;
+    margin: 1rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
 </style>

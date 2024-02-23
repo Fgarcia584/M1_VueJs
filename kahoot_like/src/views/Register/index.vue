@@ -1,41 +1,59 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '../../stores/user.ts';
 
 const Email = ref('');
 const Password = ref('');
 const ConfirmPassword = ref('');
 const ErrorMsg = ref('');
+const router = useRouter();
 
+const RegisterWithGoogle = () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  const userStore = useUserStore();
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      userStore.setUser(result.user);
+      router.push('/');
+    }).catch((error) => {
+      handleErrors(error);
+    });
+};
 
 const SubmitRegister = () => {
-  console.log(Email.value, Password.value, ConfirmPassword.value);
   if (Password.value === ConfirmPassword.value) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, Email.value, Password.value)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(() => {
+        router.push('/login');
+
       })
       .catch((error) => {
-        switch (error.code) {
-          case 'auth/email-already-in-use':
-            ErrorMsg.value = 'Email already in use';
-            break;
-          case 'auth/invalid-email':
-            ErrorMsg.value = 'Invalid email';
-            break;
-          case 'auth/weak-password':
-            ErrorMsg.value = 'Weak password';
-            break;
-          default:
-            ErrorMsg.value = 'An error occurred';
-            break;
-        }
+        handleErrors(error);
       });
   } else {
     ErrorMsg.value = 'Passwords do not match';
+  }
+};
+
+const handleErrors = (error: any) => {
+  switch (error.code) {
+    case 'auth/email-already-in-use':
+      ErrorMsg.value = 'Email already in use';
+      break;
+    case 'auth/invalid-email':
+      ErrorMsg.value = 'Invalid email';
+      break;
+    case 'auth/weak-password':
+      ErrorMsg.value = 'Weak password';
+      break;
+    default:
+      ErrorMsg.value = 'An error occurred';
+      break;
   }
 };
 
@@ -53,6 +71,7 @@ const SubmitRegister = () => {
           <input type="password" placeholder="Confirm Password" class="register-input" v-model="ConfirmPassword" />
           <div v-if="ErrorMsg" class="error-container">{{ ErrorMsg }}</div>
           <button @click="SubmitRegister" class="register-button">Register</button>
+          <button @click="RegisterWithGoogle" class="register-button">Register with Google</button>
         </div>
       </div>
     </div>
