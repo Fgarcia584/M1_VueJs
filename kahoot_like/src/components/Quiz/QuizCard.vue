@@ -2,7 +2,7 @@
 import { answer } from '../../types';
 
 const props = defineProps<answer>();
-const emit = defineEmits(['submitAnswer']);
+const emit = defineEmits(['submitAnswer']); 
 
 const SubmitAnswer = () => {
   emit('submitAnswer', props.correct);
