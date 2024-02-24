@@ -1,17 +1,14 @@
-export interface answer {
-    id: number;
+export interface Answer {
     text: string;
     correct: boolean;
 }
 
-export interface question {
-    id: number;
+export interface Question {
     title: string;
-    answers: answer[];
+    answers: Answer[];
 }
 
-export interface quiz {
-    id: number;
+export interface Quiz {
     title: string;
-    questions: question[];
+    questions: Question[];
 }

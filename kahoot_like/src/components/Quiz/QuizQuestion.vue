@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { question } from '../../types';
+import { Question } from '../../types';
 import QuizCard from './QuizCard.vue';
 
-const props = defineProps<question>();
+const props = defineProps<Question>();
 const emit = defineEmits(['submitAnswer']);
 
 const submitAnswer = (answer: boolean) => {
@@ -17,8 +17,8 @@ const submitAnswer = (answer: boolean) => {
 
         <div class="answers-container">
             <div class="question-answers">
-                <div v-for="answer in props.answers" :key="answer.id">
-                    <QuizCard v-bind="answer" @submitAnswer="answer => submitAnswer(answer)"/>
+                <div v-for="(answer, index) in props.answers" >
+                    <QuizCard class="answer" v-bind="answer" :id="index" @submitAnswer="answer => submitAnswer(answer)"/>
                 </div>
             </div>
         </div>
@@ -50,4 +50,35 @@ const submitAnswer = (answer: boolean) => {
     gap: 1rem;
 }
 
+.answer[id="0"] {
+  background-color: rgb(181, 0, 0);
+}
+
+.answer[id="0"]:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.answer[id="1"] {
+  background-color: rgb(0, 0, 171);
+}
+
+.answer[id="1"]:hover {
+  background-color: rgb(103, 103, 255);
+}
+
+.answer[id="2"] {
+  background-color: rgb(196, 134, 0);
+}
+
+.answer[id="2"]:hover {
+  background-color: rgb(255, 225, 0);
+}
+
+.answer[id="3"] {
+  background-color: green;
+}
+
+.answer[id="3"]:hover {
+  background-color: rgb(0, 255, 0);
+}
 </style>

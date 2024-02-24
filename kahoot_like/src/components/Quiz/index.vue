@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useQuestionsStore } from '../../store'
-import QuizQuestion from './QuizQuestion.vue';
+import { ref } from 'vue';
+import QuizQuestion from '@/components/Quiz/QuizQuestion.vue';
+import { Quiz } from '../../types';
+import { defineProps } from 'vue';
 
-const questionsStore = useQuestionsStore();
 const currentQuestion = ref(0);
 const score = ref(0);
+
 const submitAnswer = (answer: boolean) => {
     if (answer) {
         score.value += 1;
@@ -13,27 +14,25 @@ const submitAnswer = (answer: boolean) => {
     currentQuestion.value += 1;
 };
 
+const props = defineProps<Quiz>();
 
-onMounted(() => {
-    questionsStore.populate();
-});
+
 
 </script>
 
 <template>
     <div>
-        <h1>{{ questionsStore.quizz.title }}</h1>
+        <h1>{{ props.title }}</h1>
         <div class="quiz-container">
             <div class="quiz-questions">
-                <div class="question" v-for="question in questionsStore.quizz.questions" :key="question.id"
-                    :id="question.id as unknown as string">
-                    <div v-if="question.id === currentQuestion">
-                        <QuizQuestion v-bind="question" @submitAnswer="answer => submitAnswer(answer)" />
+                <div class="question" v-for="(question, index) in props.questions" :key="index">
+                    <div v-if="index === currentQuestion">
+                        <QuizQuestion v-bind="question" :id="index" @submitAnswer="answer => submitAnswer(answer)" />
                     </div>
                 </div>
             </div>
-            <div v-if="currentQuestion >= questionsStore.quizz.questions.length">
-                <h1>Score: {{ score }} / {{ questionsStore.quizz.questions.length }}</h1>
+            <div v-if="currentQuestion >= props.questions.length">
+                <h1>Score: {{ score }} / {{ props.questions.length }}</h1>
             </div>
         </div>
     </div>
