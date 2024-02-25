@@ -12,3 +12,18 @@ export interface Quiz {
     title: string;
     questions: Question[];
 }
+
+// export interface NewQuiz {
+//     title: string;
+//     questions: [
+//         {
+//             title: string;
+//             answers: [
+//                 {
+//                     text: string;
+//                     correct: boolean;
+//                 }
+//             ]
+//         }
+//     ]
+// }

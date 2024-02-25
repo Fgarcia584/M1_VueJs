@@ -1,21 +1,63 @@
 <script setup lang="ts">
 
-import { ref } from 'vue';
-import { Question, Quiz } from '../../../types';
-// import { addQuiz } from '@/composables/request';
+import { reactive } from 'vue';
+// import { NewQuiz } from '../../../types';
+import { addQuiz } from '@/composables/request';
 
-const newQuizTitle: Quiz = ref({
+// const newQuizTitle: Quiz = ref({
+//     title: '',
+// });
+
+// const newQuizQuestions: Question[] = ref([]);
+
+// export interface NewQuiz {
+//     title: string;
+//     questions: [
+//         {
+//             title: string;
+//             answers: [
+//                 {
+//                     text: string;
+//                     correct: boolean;
+//                 }
+//             ]
+//         }
+//     ]
+// }
+
+const newQuiz = reactive({
     title: '',
+    questions: [
+        {
+            title: '',
+            answers: [
+                {
+                    text: '',
+                    correct: false
+                },
+                {
+                    text: '',
+                    correct: false
+                },
+                {
+                    text: '',
+                    correct: false
+                },
+                {
+                    text: '',
+                    correct: false
+                }
+            ]
+        }
+    ]
 });
 
-const newQuizQuestions: Question[] = ref([]);
-
-const numberOfQuestions = ref(2);
+// const numberOfQuestions = ref(2);
 
 
 const submitQuiz = async () => {
-    // await addQuiz(newQuiz);
-    // newQuiz.questions.push({ title: '', answers: [{ text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }] })
+    await addQuiz(newQuiz);
+    console.log(newQuiz);
 };
 
 
@@ -25,29 +67,63 @@ const submitQuiz = async () => {
 <template>
     <div>
         <div class="container">
-            <h1>Add Quiz</h1>
             <div class="quiz-form">
+                <h1>Add Quiz</h1>
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" v-model="newQuizTitle" />
+                    <input type="text" id="title" v-model="newQuiz.title" placeholder="Quiz's name" />
                 </div>
                 <div class="form-group">
                     <label for="questions">Questions</label>
-                    <div class="question-form" v-for="index in numberOfQuestions" :key="index">
-                        <label for="question">Question {{ index }}</label>
-                        <input type="text" id="question" v-model="newQuizQuestions[index - 1].title" />
-                        <div class="answer-form" v-for="answerIndex in 4" :key="answerIndex">
-                            <label for="answer">Answer {{ answerIndex }}</label>
-                            <input type="text" id="answer" v-model="newQuizQuestions[index - 1].answers[answerIndex].text" />
-                            <label for="correct">Correct</label>
-                            <input type="checkbox" id="correct" v-model="newQuizQuestions[index - 1].answers[answerIndex].correct" />+
+                    <div class="question-form" v-for="(question, index) in newQuiz.questions " :key="index">
+                        <label for="question">Question {{ index + 1 }}</label>
+                        <input type="text" id="question" v-model="question.title" placeholder="Write your question" />
+                        <div class="answer-form" v-for="(answer, answerIndex) in question.answers" :key="answerIndex">
+                            <input type="text" id="answer" v-model="answer.text" placeholder="Answer Number {{ answerIndex + 1 }}"/>
+                            <label for="correct">Correct Anwser ? </label>
+                            <input type="checkbox" id="correct" v-model="answer.correct"/>
                         </div>
                     </div>
                 </div>
+                <button @click="newQuiz.questions.push({ title: '', answers: [{ text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }] })"> Add Question  </button> |
                 <button @click="submitQuiz">Submit</button>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(61, 61, 61);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 2rem;
+}
+
+.form-group {
+    margin: 1rem 0;
+}
+
+.question-form {
+    margin: 1rem 0;
+}
+
+.answer-form {
+    margin: 1rem 0;
+}
+
+
+</style>
