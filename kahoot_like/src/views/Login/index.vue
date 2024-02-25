@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '../../stores/user.ts';
+import { useUserStore } from '@/stores/user';
 
 const Email = ref('');
 const Password = ref('');
@@ -14,8 +14,8 @@ const userStore = useUserStore();
 const SubmitLogin = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, Email.value, Password.value)
-        .then((userCredential) => {
-            userStore.setUser(userCredential.user);
+        .then((result) => {
+            userStore.setUser(result.user);
             router.push('/');
         })
         .catch((error) => {
@@ -60,7 +60,7 @@ const SubmitLogin = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 5rem)
 }
 
 .login-form {

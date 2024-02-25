@@ -4,9 +4,6 @@ import { reactive } from 'vue';
 // import { NewQuiz } from '../../../types';
 import { addQuiz } from '@/composables/request';
 
-// const newQuizTitle: Quiz = ref({
-//     title: '',
-// });
 
 // const newQuizQuestions: Question[] = ref([]);
 
@@ -98,7 +95,7 @@ const submitQuiz = async () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 5rem);
 }
 
 .quiz-form {

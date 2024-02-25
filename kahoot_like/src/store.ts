@@ -1,7 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
-import { collection, getDocs } from "firebase/firestore"
-import { db } from "./main"
+
 
 export const useQuestionsStore = defineStore('questions', () => {
     const quizz = ref({

@@ -16,9 +16,12 @@ const RegisterWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   const userStore = useUserStore();
   signInWithPopup(auth, provider)
-    .then((result) => {
-      userStore.setUser(result.user);
-      router.push('/');
+    .then(() => {
+      if (auth.currentUser) {
+        userStore.setUser(auth.currentUser);
+        console.log(auth.currentUser);
+        // router.push('/');
+      }
     }).catch((error) => {
       handleErrors(error);
     });
@@ -66,7 +69,7 @@ const handleErrors = (error: any) => {
       <div class="register-form">
         <div class="register-title">Register</div>
         <div class="register-inputs">
-          <input type="text" placeholder="Email" class="register-input" v-model="Email"/>
+          <input type="text" placeholder="Email" class="register-input" v-model="Email" />
           <input type="password" placeholder="Password" class="register-input" v-model="Password" />
           <input type="password" placeholder="Confirm Password" class="register-input" v-model="ConfirmPassword" />
           <div v-if="ErrorMsg" class="error-container">{{ ErrorMsg }}</div>
@@ -83,13 +86,14 @@ const handleErrors = (error: any) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 5rem)
 }
 
 .register-title {
   font-size: 2rem;
   margin: 1rem;
 }
+
 .register-form {
   display: flex;
   flex-direction: column;
@@ -135,7 +139,7 @@ const handleErrors = (error: any) => {
   background-color: red;
   width: 20vw;
   margin: 1rem;
-  padding: 1rem;  
+  padding: 1rem;
   font-size: 1.5rem;
 }
 </style>
