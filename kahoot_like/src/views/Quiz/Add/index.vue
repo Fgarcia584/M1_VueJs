@@ -24,6 +24,7 @@ import { addQuiz } from '@/composables/request';
 
 const newQuiz = reactive({
     title: '',
+    category: '',
     questions: [
         {
             title: '',
@@ -67,7 +68,8 @@ const submitQuiz = async () => {
             <div class="quiz-form">
                 <h1>Add Quiz</h1>
                 <div class="form-group">
-                    <input type="text" id="title" v-model="newQuiz.title" placeholder="Quiz's name" />
+                    <input type="text" id="title" v-model="newQuiz.title" placeholder="Quiz's name" /> |
+                    <input type="text" id="title" v-model="newQuiz.category" placeholder="Quiz's categories" />
                 </div>
                 <div class="form-group">
                     <label for="questions">Questions</label>
@@ -81,7 +83,7 @@ const submitQuiz = async () => {
                         </div>
                     </div>
                 </div>
-                <button @click="newQuiz.questions.push({ title: '', answers: [{ text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }] })"> Add Question  </button> |
+                <button @click="newQuiz.questions.push({ title: '', answers: [{ text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }, { text: '', correct: false }] })"> Add Question  </button>
                 <button @click="submitQuiz">Submit</button>
             </div>
         </div>

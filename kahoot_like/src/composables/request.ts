@@ -5,9 +5,12 @@ import { Quiz } from "src/types";
 
 export async function getQuizzes() {
     const querySnapshot = await getDocs(collection(db, "quizs"));
+    const quizzes: Quiz[] = [];
     querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
+        quizzes.push(doc.data() as Quiz);
+        quizzes[quizzes.length - 1].id = doc.id;
     });
+    return quizzes;
 }
 
 export async function getQuizById(id: string) {
