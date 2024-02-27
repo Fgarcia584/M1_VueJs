@@ -1,65 +1,30 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useRouter } from 'vue-router';
-import { useUserStore } from '../../stores/user.ts';
+// import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/user';
 
 const Email = ref('');
 const Password = ref('');
 const ConfirmPassword = ref('');
 const ErrorMsg = ref('');
-const router = useRouter();
 
-const RegisterWithGoogle = () => {
-  const auth = getAuth();
-  const provider = new GoogleAuthProvider();
-  const userStore = useUserStore();
-  signInWithPopup(auth, provider)
-    .then(() => {
-      if (auth.currentUser) {
-        userStore.setUser(auth.currentUser);
-        console.log(auth.currentUser);
+// const router = useRouter();
+const authStore = useAuthStore();
+
+const RegisterWithGoogle = async () => {
+    await authStore.loginUserWithGoogle().then(() => {
         // router.push('/');
-      }
-    }).catch((error) => {
-      handleErrors(error);
     });
 };
 
 const SubmitRegister = () => {
   if (Password.value === ConfirmPassword.value) {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, Email.value, Password.value)
-      .then(() => {
-        router.push('/login');
-
-      })
-      .catch((error) => {
-        handleErrors(error);
-      });
+    authStore.Register(Email.value, Password.value);
   } else {
     ErrorMsg.value = 'Passwords do not match';
   }
 };
-
-const handleErrors = (error: any) => {
-  switch (error.code) {
-    case 'auth/email-already-in-use':
-      ErrorMsg.value = 'Email already in use';
-      break;
-    case 'auth/invalid-email':
-      ErrorMsg.value = 'Invalid email';
-      break;
-    case 'auth/weak-password':
-      ErrorMsg.value = 'Weak password';
-      break;
-    default:
-      ErrorMsg.value = 'An error occurred';
-      break;
-  }
-};
-
 
 </script>
 

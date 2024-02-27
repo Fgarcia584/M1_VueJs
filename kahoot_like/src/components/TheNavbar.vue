@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/user';
 
+
+const authStore = useAuthStore();
 
 </script>
 
@@ -13,6 +16,11 @@
         <div class="navbar__links">
         <router-link to="/quiz/add">Create Quiz</router-link>
         <router-link to="/quiz/mIWK3itcyouTP75ErqtW">Quizzes</router-link>
+        <!-- <div v-if="authStore.user.value.uid"></div> -->
+        <div>
+            <router-link to="/profile">Profile </router-link>
+            <button @click="authStore.logoutUser()">Logout</button>
+        </div>
         <router-link to="/login">Login</router-link>
         <router-link to="/register">Register</router-link>
         </div>

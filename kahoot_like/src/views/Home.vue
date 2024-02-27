@@ -5,12 +5,14 @@ import { onBeforeMount, reactive, ref } from 'vue';
 
 let isLoaded = ref(false);
 let quizzes: Quiz[] = reactive([]);
+
+
 onBeforeMount(async () => {
   isLoaded.value = true;
 
   quizzes = await getQuizzes();
   isLoaded.value = false;
-  console.log(quizzes);
+  // console.log(quizzes);
 
 });
 
@@ -74,6 +76,7 @@ onBeforeMount(async () => {
 .quiz-card:hover {
   transform: scale(0.95);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: rgb(228, 228, 228);
   cursor: pointer;
 }
 </style>

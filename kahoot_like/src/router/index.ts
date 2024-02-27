@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useUserStore } from "@/stores/user";
+import { useAuthStore } from "@/stores/user";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
@@ -27,8 +27,7 @@ const getCurrentUser = () => {
 }
 
 router.beforeEach(async (to, from, next) => {
-    const userStore = useUserStore()
-    console.log("userStore2", userStore.user)
+    const userStore = useAuthStore()
     if (to.matched.some((record) => record.meta.requiresAuth)) {
         if (!await getCurrentUser()) {
             next({ path: "/login" });
