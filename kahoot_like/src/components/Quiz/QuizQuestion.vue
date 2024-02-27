@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Question } from '../../types';
-import QuizCard from './QuizCard.vue';
+import Quizbutton from './QuizButton.vue';
 
 const props = defineProps<Question>();
 const emit = defineEmits(['submitAnswer']);
@@ -12,13 +12,15 @@ const submitAnswer = (answer: boolean) => {
 </script>
 
 <template>
-    <div>
+    <div class="question-container">
         <div class="question-title">{{ props.title }}</div>
-
+        <div class="middle-container">
+            <!-- <img v-if="props.image" :src="props.image" alt="Question image" /> -->
+        </div>
         <div class="answers-container">
             <div class="question-answers">
                 <div v-for="(answer, index) in props.answers" >
-                    <QuizCard class="answer" v-bind="answer" :id="index" @submitAnswer="answer => submitAnswer(answer)"/>
+                    <Quizbutton class="answer" v-bind="answer" :id="index" @submitAnswer="answer => submitAnswer(answer)"/>
                 </div>
             </div>
         </div>
@@ -26,13 +28,23 @@ const submitAnswer = (answer: boolean) => {
 </template>
 
 <style scoped>
+
+.question-container {
+  height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
 .question-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
-    background-color: #ccc;
+    background-color: #f0f0f0;
     color: black;
     padding: 1rem 0;
+    width: 100vw;
 }
 
 .answers-container {
@@ -42,7 +54,7 @@ const submitAnswer = (answer: boolean) => {
 }
 
 .question-answers {
-    max-width: 90vw;
+    max-width: 94vw;
     display: flex;
     flex-direction: row;
     justify-content: center;

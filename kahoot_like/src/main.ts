@@ -34,8 +34,8 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 const pinia = createPinia()
 const app = createApp(App)
  
-app.use(router)
 app.use(pinia)
+app.use(router)
 app.mount('#app')
 
-export { auth, db, googleProvider }
+export { auth, db, googleProvider, firebase }

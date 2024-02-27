@@ -12,8 +12,6 @@ onBeforeMount(async () => {
 
   quizzes = await getQuizzes();
   isLoaded.value = false;
-  // console.log(quizzes);
-
 });
 
 </script>
@@ -24,7 +22,6 @@ onBeforeMount(async () => {
       <h1>Loading...</h1>
     </div>
     <div v-else>
-      <h1>Home</h1>
       <div v-if="quizzes.length === 0">
         <h2>No quizzes found</h2>
       </div>
@@ -32,6 +29,7 @@ onBeforeMount(async () => {
         <div v-for="quiz in quizzes" class="quiz-card">
           <img :src="quiz.thumbmail || `https://picsum.photos/140/140?sig=${Math.random()}`" alt="quiz thumbmail" />
           <h2>{{ quiz.title }}</h2>
+          <router-link :to="'/quiz/'+ quiz.id">Play</router-link>
         </div>
       </div>
     </div>

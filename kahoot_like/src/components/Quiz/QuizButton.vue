@@ -20,15 +20,17 @@ const SubmitAnswer = () => {
 
 <style scoped>
 .answer-button {
-  width: 44vw;
-
+  width: 46vw;
+  height: 10vh;
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 1.5rem;
-  text-align: left;
+  font-size: 2rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
   margin: 2rem 0;
 }
 </style>
