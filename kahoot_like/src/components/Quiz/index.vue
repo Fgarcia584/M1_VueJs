@@ -52,7 +52,17 @@ setTimeout(() => {
                 </div>
             </div>
             <div v-if="currentQuestion >= props.questions.length">
-                <h1>Score: {{ score }} / {{ props.questions.length }}</h1>
+
+                <div class="final_container">
+                    <div class="background">
+                        <h1>Quiz Finished!</h1>
+                        <div class="final_score">
+                            <h1>Score: {{ score }} / {{ props.questions.length }}</h1>
+                        </div>
+                        <router-link class="btn" to="/">Go back to home</router-link>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -97,6 +107,44 @@ setTimeout(() => {
     transform: translateY(-8rem);
 }
 
+.final_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: calc(100vh - 10rem);
+
+}
+.background {
+    background-color: #680056;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.btn {
+    padding: 1rem 2rem;
+    border: #ffffff 2px solid;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    color: #680056
+}
+
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
@@ -139,37 +187,4 @@ setTimeout(() => {
         transform: scale(1);
     }
 }
-
-
-@keyframes wiggle {
-
-    0%,
-    7% {
-        transform: rotateZ(0);
-    }
-
-    15% {
-        transform: rotateZ(-15deg);
-    }
-
-    20% {
-        transform: rotateZ(10deg);
-    }
-
-    25% {
-        transform: rotateZ(-10deg);
-    }
-
-    30% {
-        transform: rotateZ(6deg);
-    }
-
-    35% {
-        transform: rotateZ(-4deg);
-    }
-
-    40%,
-    100% {
-        transform: rotateZ(0);
-    }
-}</style>
+</style>
