@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getQuizzes } from '@/composables/request';
+import TheNavbar from '@/components/TheNavbar.vue';
 import { Quiz } from 'src/types';
 import { onBeforeMount, reactive, ref } from 'vue';
 
@@ -18,6 +19,9 @@ onBeforeMount(async () => {
 
 <template>
   <div>
+    <header>
+      <TheNavbar />
+    </header>
     <div v-if="isLoaded">
       <h1>Loading...</h1>
     </div>
@@ -29,7 +33,7 @@ onBeforeMount(async () => {
         <div v-for="quiz in quizzes" class="quiz-card">
           <img :src="quiz.thumbmail || `https://picsum.photos/140/140?sig=${Math.random()}`" alt="quiz thumbmail" />
           <h2>{{ quiz.title }}</h2>
-          <router-link :to="'/quiz/'+ quiz.id">Play</router-link>
+          <router-link :to="'/quiz/' + quiz.id">Play</router-link>
         </div>
       </div>
     </div>

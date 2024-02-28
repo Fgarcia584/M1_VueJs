@@ -11,7 +11,7 @@ const router = createRouter({
         { path: "/test", component: () => import("@/views/Test.vue") },
         { path: "/register", component: () => import("@/views/Register/index.vue") },
         { path: "/login", component: () => import("@/views/Login/index.vue") },
-        { path: "/quiz/add", component: () => import("@/views/Quiz/Add/index.vue"), meta: { requiresAuth: true } },
+        { path: "/quiz/add", component: () => import("@/views/Quiz/Add/index.vue") },
         { name: "quiz", path: "/quiz/:id", component: () => import("@/views/Quiz/index.vue"), props: true, meta: { requiresAuth: true } },
     ],
 });

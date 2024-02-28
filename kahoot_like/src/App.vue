@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import TheNavbar from '@/components/TheNavbar.vue';
 import { useAuthStore } from '@/stores/user';
 import { onMounted } from 'vue';
 
@@ -13,13 +12,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <header>
-    <TheNavbar />
-  </header>
-  <main>
-    <router-view />
-  </main>
-
+  <div>
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
