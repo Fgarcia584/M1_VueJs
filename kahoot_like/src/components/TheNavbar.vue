@@ -44,6 +44,8 @@ let isLogged = ref(false);
 
 .navbar__logo {
     font-size: 1.5rem;
+    color: rgb(107, 0, 89);
+    font-weight: 600;
 }
 
 .navbar__links {
