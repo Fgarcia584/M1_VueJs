@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getQuizzes } from '@/composables/request';
 import TheNavbar from '@/components/TheNavbar.vue';
-import { Quiz } from 'src/types';
+import { Quiz } from '@/types';
 import { onBeforeMount, reactive, ref } from 'vue';
 
 let isLoaded = ref(false);

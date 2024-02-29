@@ -14,7 +14,6 @@ const authStore = useAuthStore();
 
 const RegisterWithGoogle = async () => {
     await authStore.loginUserWithGoogle().then(() => {
-        // router.push('/');
     });
 };
 

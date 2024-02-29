@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/user';
 
 const Email = ref('');
 const Password = ref('');
 
 const router = useRouter();
 const ErrorMsg = ref('');
-const userStore = useUserStore();
+const userStore = useAuthStore();
 
 const SubmitLogin = () => {
     const auth = getAuth();
@@ -37,6 +37,12 @@ const SubmitLogin = () => {
         });
 };
 
+const LoginwithGoogle = async () => {
+    await userStore.loginUserWithGoogle().then(() => {
+        // router.push('/');
+    });
+};
+
 </script>
 
 <template>
@@ -49,6 +55,7 @@ const SubmitLogin = () => {
                     <input type="password" placeholder="Password" class="login-input" v-model="Password" />
                     <div v-if="ErrorMsg" class="error-container">{{ ErrorMsg }}</div>
                     <button @click="SubmitLogin" class="login-button">Login</button>
+                    <button @click="LoginwithGoogle" class="login-button">Login with Google</button>
                 </div>
             </div>
         </div>

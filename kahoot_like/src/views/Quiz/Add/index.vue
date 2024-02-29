@@ -71,7 +71,7 @@ const submitQuiz = async () => {
                 <div class="left_column">
                     <button class="add_qestion_btn" @click="addQuestion">Add Question </button>
                     <div class="" v-for="index in newQuiz.questions.length" :key="index">
-                        <div @click="setCurrentQuestion(index-1)" class="question_selector">Question {{ index }}</div>
+                        <div @click="setCurrentQuestion(index - 1)" class="question_selector">Question {{ index }}</div>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ const submitQuiz = async () => {
                 <div class="main_column">
                     <div class="question-form-container" v-for="(question, index) in newQuiz.questions " :key="index">
                         <div v-if="current_question === index" class="question-form">
-                            
+
                             <div class="question_title_container">
                                 <input class="question_title" type="text" id="question" v-model="question.title"
                                     placeholder="Write your question" />
@@ -170,40 +170,41 @@ const submitQuiz = async () => {
 
 .add_qestion_btn {
     width: 6vw;
-    height: 4vh;
-    padding: 1rem;
+    margin: 1rem;
+    padding: 0.5rem;
     border: 1px solid #e7e7e7;
     border-radius: 5px;
     font-weight: 700;
-    font-size: 1rem;
-    margin: 1rem 0;
+    font-size: 12px;
     background-color: #0033db;
     text-align: center;
     cursor: pointer;
+    text-align: center;
 }
 
-.question_selector{
+.question_selector {
     width: 7vw;
-    height: 4vh;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     font-weight: 700;
     font-size: 1rem;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     background-color: #41b9ff;
     text-align: center;
     cursor: pointer;
 
 }
 
-
-
-/* .main_column {
-    height: 96vh;
+.question_selector:active {
+    background-color: #0033db;
 }
-.question-form-container {
-    height: 96vh;
-} */
+
+.main_column {
+    background-image: url("../../../assets/class_background.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
 .question-form {
     display: flex;
     flex-direction: column;

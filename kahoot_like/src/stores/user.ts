@@ -28,7 +28,6 @@ export const useAuthStore = defineStore('authStore', () => {
             } else {
                 // No user is signed in.
                 user.value = {};
-                router.push('/login');  
             }
         });
     }
