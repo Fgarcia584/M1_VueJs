@@ -55,8 +55,8 @@ const submitQuiz = async () => {
             <div class="header">
                 <div class="left_part">
                     <router-link class="kahoot_btn" to="/">Kahoot_like</router-link>
-                    <input type="text" id="title" v-model="newQuiz.title" placeholder="Quiz's name" />
-                    <input type="text" id="title" v-model="newQuiz.category" placeholder="Quiz's categories" />
+                    <input type="text" class="header_input" id="title" v-model="newQuiz.title" placeholder="Quiz's name" />
+                    <input type="text" class="header_input" id="title" v-model="newQuiz.category" placeholder="Quiz's categories" />
                 </div>
 
                 <div class="right_part">
@@ -134,6 +134,19 @@ const submitQuiz = async () => {
     padding: 8px 16px;
     font-size: large;
     cursor: pointer;
+}
+
+.header_input {
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    margin: 0 1rem;
+    color: black;
+}
+.header_input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
 }
 
 .submit_btn {
